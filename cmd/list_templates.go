@@ -2,6 +2,8 @@ package cmd
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
 )
@@ -29,6 +31,21 @@ func init() {
 }
 
 func onList(cmd *cobra.Command, args []string) {
-	// TODO: list all available templates that can be used to generate .gitignore file
-	fmt.Println("ls called")
+	path, err := os.Getwd()
+
+	if err != nil {
+		cobra.CheckErr(err)
+	}
+
+	path += "/templates/"
+
+	files, err := filepath.Glob(path + "*.gitignore")
+
+	if err != nil {
+		cobra.CheckErr(err)
+	}
+
+	for _, file := range files {
+		fmt.Println(filepath.Base(file))
+	}
 }
