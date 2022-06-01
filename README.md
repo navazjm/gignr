@@ -23,6 +23,27 @@ as the mvp for gignr stays the same. The goal for gignr is as follows:
 
 ## Installation
 
+### Install manually from source
+
+1. [Install Go 1.8.2 or later](https://go.dev/dl/)
+1. Clone the repo and cd into the directory
+
+```sh 
+git clone https://github.com/michaelnavs/gignr && cd gignr
+```
+
+1. Install gignr
+```sh 
+go install
+```
+
+1. Ensure `~/go/bin/` is in your `$PATH`.
+1. test by running the following command:
+
+```sh 
+gignr -h
+```
+
 ## Usage
 
 - List all available templates to use to generate a .gitignore file for your project
