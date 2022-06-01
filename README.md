@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <img src="https://michaelnavs-readme.s3.us-east-2.amazonaws.com/gignr.jpg" alt="Logo" width="200">
+  <img src="https://michaelnavs-readme.s3.us-east-2.amazonaws.com/gignr.jpg" alt="Logo" width="300">
 
   <h3 align="center">gignr (Gee Ignore)</h3>
 
@@ -28,7 +28,7 @@ as the mvp for gignr stays the same. The goal for gignr is as follows:
 - List all available templates to use to generate a .gitignore file for your project
 
 ```sh 
-gignr list
+gignr ls
 ```
 
 - Generate a new .gitinore file with a single template, use the -t or --template flag
