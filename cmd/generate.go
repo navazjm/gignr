@@ -13,8 +13,8 @@ var isAppending bool
 var generateCmd = &cobra.Command{
 	Use:   "generate",
 	Short: "Generate a new .gitignore file.",
-  Long: "Generate a new .gitignore file. This will overwrite an existing .gitignore file by default. See append flag for modifying existing .gitignore files.",
-  Run: onGnerate,
+	Long:  "Generate a new .gitignore file. This will overwrite an existing .gitignore file by default. See append flag for modifying existing .gitignore files.",
+	Run:   onGnerate,
 }
 
 func init() {
@@ -29,14 +29,14 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	generateCmd.Flags().BoolVarP(&isAppending, "append", "a", false, "This will append templates to an existing .gitignore file.")
-	generateCmd.Flags().StringArrayVarP(&templates,"template", "t", templates, "REQUIRED. Specify which templates to use to generate .gitignore file.")
-  generateCmd.MarkFlagRequired("template")
+	generateCmd.Flags().StringArrayVarP(&templates, "template", "t", templates, "REQUIRED. Specify which templates to use to generate .gitignore file.")
+	generateCmd.MarkFlagRequired("template")
 }
 
 func onGnerate(cmd *cobra.Command, args []string) {
-  // TODO: generate .gitignore file based on passed in templates
-  if isAppending {
-    fmt.Println("we are appending")
-  }
-  fmt.Println(templates)
+	// TODO: generate .gitignore file based on passed in templates
+	if isAppending {
+		fmt.Println("we are appending")
+	}
+	fmt.Println(templates)
 }

@@ -1,11 +1,11 @@
 package cmd
 
 import (
-  "fmt"
-  "os"
+	"fmt"
+	"os"
 
-  "github.com/spf13/cobra"
-  "github.com/spf13/viper"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var cfgFile string
@@ -23,11 +23,11 @@ var rootCmd = &cobra.Command{
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-  cobra.CheckErr(rootCmd.Execute())
+	cobra.CheckErr(rootCmd.Execute())
 }
 
 func init() {
-  cobra.OnInitialize(initConfig)
+	cobra.OnInitialize(initConfig)
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
