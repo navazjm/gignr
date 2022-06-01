@@ -2,11 +2,10 @@ package cmd
 
 import (
   "fmt"
-	"os"
+  "os"
 
-	"github.com/spf13/cobra"
-
-	"github.com/spf13/viper"
+  "github.com/spf13/cobra"
+  "github.com/spf13/viper"
 )
 
 var cfgFile string
