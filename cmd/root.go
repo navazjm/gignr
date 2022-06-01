@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"fmt"
+  "fmt"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -14,9 +14,8 @@ var cfgFile string
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "gignr",
-	Short: "Generate .gitignore template for your projects",
-	Long:  "Generate .gitignore template for your projects",
-
+	Short: "Generate .gitingore file for your project",
+	Long:  "Generate .gitingore file for your project",
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
@@ -25,12 +24,11 @@ var rootCmd = &cobra.Command{
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	cobra.CheckErr(rootCmd.Execute())
+  cobra.CheckErr(rootCmd.Execute())
 }
 
 func init() {
-	cobra.OnInitialize(initConfig)
-
+  cobra.OnInitialize(initConfig)
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
