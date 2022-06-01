@@ -3,9 +3,8 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/michaelnavs/gignr/utils"
 	"github.com/spf13/cobra"
-  "github.com/michaelnavs/gignr/utils"
-
 )
 
 // listCmd represents the list command
@@ -32,10 +31,9 @@ func init() {
 
 func onList(cmd *cobra.Command, args []string) {
 
-  files := utils.GetTemplates() 
-
+	files := utils.GetTemplates()
 
 	for _, file := range files {
-    fmt.Println(file)
+		fmt.Println(file)
 	}
 }

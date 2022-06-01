@@ -22,10 +22,10 @@ func GetTemplates() []string {
 		cobra.CheckErr(err)
 	}
 
-  for i, file := range files {
-    filename := filepath.Base(file)
-    files[i] = filename[: len(filename)-10] // removes .gitignore from file name
-  }
+	for i, file := range files {
+		filename := filepath.Base(file)
+		files[i] = filename[:len(filename)-10] // removes .gitignore from file name
+	}
 
-  return files
+	return files
 }
