@@ -12,7 +12,7 @@
 
 ## About gignr
 
-In the past, I used topal/gitignore.io to generate a .gitignore file for all my projects. However,
+In the past, I used [toptal/gitignore.io](https://github.com/toptal/gitignore.io) to generate a .gitignore file for all my projects. However,
 they decided to disable their tool if you use an ad blocker. In my opinion, this is the wrong approach
 for a free tool, so I am creating a free and open source replacement tool. For now, the plan is to create
 a simple, usable cli tool to generate a .gitignore file. I would love to implement new features as long
