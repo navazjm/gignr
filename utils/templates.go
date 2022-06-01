@@ -14,9 +14,9 @@ func GetTemplates() []string {
 		cobra.CheckErr(err)
 	}
 
-	path += "/templates/"
+	path += "/templates/*.gitignore"
 
-	files, err := filepath.Glob(path + "*.gitignore")
+	files, err := filepath.Glob(path)
 
 	if err != nil {
 		cobra.CheckErr(err)
