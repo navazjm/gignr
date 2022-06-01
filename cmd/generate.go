@@ -35,6 +35,8 @@ func init() {
 
 func onGnerate(cmd *cobra.Command, args []string) {
 	// TODO: generate .gitignore file based on passed in templates
+	// TODO: if isAppending, check to see if .gitignore file exists, if so, append templates to end of file
+
 	if isAppending {
 		fmt.Println("we are appending")
 	}
