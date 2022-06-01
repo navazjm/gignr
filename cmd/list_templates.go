@@ -10,8 +10,8 @@ import (
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "ls",
-	Short: "List all available templates to gnerate .gitignore file",
-	Long:  "List all available templates to gnerate .gitignore file",
+	Short: "List all available templates to generate .gitignore file",
+	Long:  "List all available templates to generate .gitignore file",
 	Run:   onList,
 }
 
