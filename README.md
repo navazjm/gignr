@@ -65,6 +65,6 @@ Distributed under the MIT License. See [LICENSE](./LICENSE) for more information
 
 ## Contact
 
-Michael Navarro - [@tehmj](https://twitter.com/tehmj) - michaelnavs@gmail.com
+Michael Navarro - [@michaeljnavs](https://twitter.com/michaeljnavs) - michaelnavs@gmail.com
 
-Project Link: [https://github.com/tehmj/gignr](https://github.com/tehmj/gignr)
+Project Link: [https://github.com/michaelnavs/gignr](https://github.com/michaelnavs/gignr)
