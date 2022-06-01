@@ -2,10 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
 
 	"github.com/spf13/cobra"
+  "github.com/michaelnavs/gignr/utils"
+
 )
 
 // listCmd represents the list command
@@ -31,24 +31,11 @@ func init() {
 }
 
 func onList(cmd *cobra.Command, args []string) {
-	path, err := os.Getwd()
 
-	if err != nil {
-		cobra.CheckErr(err)
-	}
-
-	path += "/templates/"
-
-	files, err := filepath.Glob(path + "*.gitignore")
-
-	if err != nil {
-		cobra.CheckErr(err)
-	}
+  files := utils.GetTemplates() 
 
 
 	for _, file := range files {
-    filename := filepath.Base(file)
-    filename = filename[: len(filename)-10] // removes .gitignore from file name
-    fmt.Println(filename)
+    fmt.Println(file)
 	}
 }
