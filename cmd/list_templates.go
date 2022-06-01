@@ -45,7 +45,10 @@ func onList(cmd *cobra.Command, args []string) {
 		cobra.CheckErr(err)
 	}
 
+
 	for _, file := range files {
-		fmt.Println(filepath.Base(file))
+    filename := filepath.Base(file)
+    filename = filename[: len(filename)-10] // removes .gitignore from file name
+    fmt.Println(filename)
 	}
 }
