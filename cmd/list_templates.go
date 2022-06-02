@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"sort"
 
 	"github.com/michaelnavs/gignr/utils"
 	"github.com/spf13/cobra"
@@ -31,9 +32,12 @@ func init() {
 
 func onList(cmd *cobra.Command, args []string) {
 
-	files := utils.GetTemplates()
+	templateFilenames := utils.GetTemplates()
+  templateFilenames = utils.ConvertPathsToFilenames(templateFilenames)
 
-	for _, file := range files {
-		fmt.Println(file)
-	}
+  sort.Strings(templateFilenames)
+
+  for _, templateFilename := range templateFilenames {
+    fmt.Println(templateFilename)
+  }
 }

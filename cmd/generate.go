@@ -1,8 +1,11 @@
 package cmd
 
 import (
-	"fmt"
+	"bufio"
+	"os"
+	"strings"
 
+	"github.com/michaelnavs/gignr/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -34,11 +37,61 @@ func init() {
 }
 
 func onGnerate(cmd *cobra.Command, args []string) {
-	// TODO: generate .gitignore file based on passed in templates
-	// TODO: if isAppending, check to see if .gitignore file exists, if so, append templates to end of file
+	templatePaths := utils.GetTemplates()
+  templateFilenames := utils.ConvertPathsToFilenames(templatePaths)
 
-	if isAppending {
-		fmt.Println("we are appending")
-	}
-	fmt.Println(templates)
+  var gitignoreContents []string
+
+  for _, template := range templates {
+    template = strings.ToLower(template)
+    for i, file := range templateFilenames {
+      if template != file {
+        continue
+      }
+      
+      templateFile, err := os.Open(templatePaths[i])
+
+      if err != nil {
+        cobra.CheckErr(err)
+      }
+     
+      defer templateFile.Close()
+
+      scanner := bufio.NewScanner(templateFile)
+      for scanner.Scan() {
+        gitignoreContents = append(gitignoreContents, scanner.Text())
+      }
+
+      if err := scanner.Err(); err != nil {
+        cobra.CheckErr(err)
+      }
+    }
+  }
+
+  gitignorePath, err := os.Getwd()
+  if err != nil {
+    cobra.CheckErr(err)
+  } 
+  gitignorePath += "/.gitignore"
+
+
+  var gitignoreFile *os.File
+
+  if isAppending {
+    gitignoreFile, err = os.OpenFile(gitignorePath, os.O_APPEND|os.O_WRONLY, 0644)
+  } else {
+    gitignoreFile, err = os.Create(gitignorePath)
+  }
+
+  if err != nil {
+    cobra.CheckErr(err)
+  }
+
+  defer gitignoreFile.Close()
+
+  for _, line := range gitignoreContents {
+    if _, err :=  gitignoreFile.WriteString(line); err != nil {
+      cobra.CheckErr(err)
+    }
+  }
 }
