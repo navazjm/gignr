@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <img src="https://michaelnavs-readme.s3.us-east-2.amazonaws.com/gignr.jpg" alt="Logo" width="500">
+  <img src="https://michaelnavs-readme.s3.us-east-2.amazonaws.com/gignr.jpg" alt="Logo" width="700">
 
   <h3 align="center">gignr (Gee Ignore)</h3>
 
