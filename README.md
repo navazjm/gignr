@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://michaelnavs-readme.s3.us-east-2.amazonaws.com/gignr.jpg" alt="Logo" width="700">
 
-  <h3 align="center">gignr (Gee Ignore)</h3>
+  <h3 align="center">gignr</h3>
 
   <p align="center">
   Generate .gitignore files from your terminal
@@ -11,6 +11,8 @@
 </p>
 
 ## About gignr
+
+_Pronounced (Gee Ignore)_
 
 In the past, I used [toptal/gitignore.io](https://github.com/toptal/gitignore.io) to generate a .gitignore file for all my projects. However,
 they decided to disable their tool if you use an ad blocker. In my opinion, this is the wrong approach
