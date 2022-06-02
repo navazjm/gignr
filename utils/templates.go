@@ -42,6 +42,7 @@ func GetTemplates() []string {
 	return templateFiles
 }
 
+// $HOME/path/to/gignr/template.gitignore -> template
 func ConvertPathsToFilenames(paths []string) []string {
 	var filenames []string
 
