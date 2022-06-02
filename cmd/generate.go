@@ -37,7 +37,7 @@ func init() {
 }
 
 func onGnerate(cmd *cobra.Command, args []string) {
-	templatePaths := utils.GetTemplates() // used to read content of gitignore templates
+	templatePaths := utils.GetTemplates()                             // used to read content of gitignore templates
 	templateFilenames := utils.ConvertPathsToFilenames(templatePaths) // used to match specified templates by user
 
 	var gitignoreContents []string // contents of the new gitignore file
@@ -59,8 +59,8 @@ func onGnerate(cmd *cobra.Command, args []string) {
 
 			scanner := bufio.NewScanner(templateFile)
 			for scanner.Scan() {
-        line := scanner.Text()
-        line += "\n"
+				line := scanner.Text()
+				line += "\n"
 				gitignoreContents = append(gitignoreContents, line)
 			}
 
@@ -70,7 +70,7 @@ func onGnerate(cmd *cobra.Command, args []string) {
 		}
 	}
 
-  // get gitignore path in users current working dir
+	// get gitignore path in users current working dir
 	gitignorePath, err := os.Getwd()
 	if err != nil {
 		cobra.CheckErr(err)
