@@ -10,18 +10,20 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// $HOME/path/to/gignr/template.gitignore -> template.gitignore
 func RemovePath(path string) string {
 	filename := filepath.Base(path)
 	return filename
 }
 
+// template.gitignore -> template
 func RemoveGitignoreExt(filename string) string {
-	return filename[:len(filename)-10] // removes .gitignore from file name -> template
+	return filename[:len(filename)-10]
 }
 
-// returns an array of all .gitignore templates found in path/to/gignr/templates/
+// return [] of gitignore templates, where [i] = $HOME/path/to/gignr/templates/template.gitignore
 func GetTemplates() []string {
-	_, packagePath, _, ok := runtime.Caller(0) // packagePath -> path/to/gignr/utils/template.go
+	_, packagePath, _, ok := runtime.Caller(0) // packagePath = path/to/gignr/utils/template.go
 
 	if !ok {
 		fmt.Println("Error finding project directory")
