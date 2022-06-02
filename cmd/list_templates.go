@@ -33,11 +33,11 @@ func init() {
 func onList(cmd *cobra.Command, args []string) {
 
 	templateFilenames := utils.GetTemplates()
-  templateFilenames = utils.ConvertPathsToFilenames(templateFilenames)
+	templateFilenames = utils.ConvertPathsToFilenames(templateFilenames)
 
-  sort.Strings(templateFilenames)
+	sort.Strings(templateFilenames)
 
-  for _, templateFilename := range templateFilenames {
-    fmt.Println(templateFilename)
-  }
+	for _, templateFilename := range templateFilenames {
+		fmt.Println(templateFilename)
+	}
 }

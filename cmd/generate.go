@@ -38,60 +38,59 @@ func init() {
 
 func onGnerate(cmd *cobra.Command, args []string) {
 	templatePaths := utils.GetTemplates()
-  templateFilenames := utils.ConvertPathsToFilenames(templatePaths)
+	templateFilenames := utils.ConvertPathsToFilenames(templatePaths)
 
-  var gitignoreContents []string
+	var gitignoreContents []string
 
-  for _, template := range templates {
-    template = strings.ToLower(template)
-    for i, file := range templateFilenames {
-      if template != file {
-        continue
-      }
-      
-      templateFile, err := os.Open(templatePaths[i])
+	for _, template := range templates {
+		template = strings.ToLower(template)
+		for i, file := range templateFilenames {
+			if template != file {
+				continue
+			}
 
-      if err != nil {
-        cobra.CheckErr(err)
-      }
-     
-      defer templateFile.Close()
+			templateFile, err := os.Open(templatePaths[i])
 
-      scanner := bufio.NewScanner(templateFile)
-      for scanner.Scan() {
-        gitignoreContents = append(gitignoreContents, scanner.Text())
-      }
+			if err != nil {
+				cobra.CheckErr(err)
+			}
 
-      if err := scanner.Err(); err != nil {
-        cobra.CheckErr(err)
-      }
-    }
-  }
+			defer templateFile.Close()
 
-  gitignorePath, err := os.Getwd()
-  if err != nil {
-    cobra.CheckErr(err)
-  } 
-  gitignorePath += "/.gitignore"
+			scanner := bufio.NewScanner(templateFile)
+			for scanner.Scan() {
+				gitignoreContents = append(gitignoreContents, scanner.Text())
+			}
 
+			if err := scanner.Err(); err != nil {
+				cobra.CheckErr(err)
+			}
+		}
+	}
 
-  var gitignoreFile *os.File
+	gitignorePath, err := os.Getwd()
+	if err != nil {
+		cobra.CheckErr(err)
+	}
+	gitignorePath += "/.gitignore"
 
-  if isAppending {
-    gitignoreFile, err = os.OpenFile(gitignorePath, os.O_APPEND|os.O_WRONLY, 0644)
-  } else {
-    gitignoreFile, err = os.Create(gitignorePath)
-  }
+	var gitignoreFile *os.File
 
-  if err != nil {
-    cobra.CheckErr(err)
-  }
+	if isAppending {
+		gitignoreFile, err = os.OpenFile(gitignorePath, os.O_APPEND|os.O_WRONLY, 0644)
+	} else {
+		gitignoreFile, err = os.Create(gitignorePath)
+	}
 
-  defer gitignoreFile.Close()
+	if err != nil {
+		cobra.CheckErr(err)
+	}
 
-  for _, line := range gitignoreContents {
-    if _, err :=  gitignoreFile.WriteString(line); err != nil {
-      cobra.CheckErr(err)
-    }
-  }
+	defer gitignoreFile.Close()
+
+	for _, line := range gitignoreContents {
+		if _, err := gitignoreFile.WriteString(line); err != nil {
+			cobra.CheckErr(err)
+		}
+	}
 }

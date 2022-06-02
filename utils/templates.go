@@ -5,14 +5,14 @@ import (
 	"path"
 	"path/filepath"
 	"runtime"
-  "strings"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
 
 func RemovePath(path string) string {
-	filename := filepath.Base(path)        
-  return filename 
+	filename := filepath.Base(path)
+	return filename
 }
 
 func RemoveGitignoreExt(filename string) string {
@@ -37,17 +37,17 @@ func GetTemplates() []string {
 		cobra.CheckErr(err)
 	}
 
-  return templateFiles
+	return templateFiles
 }
 
 func ConvertPathsToFilenames(paths []string) []string {
-  var filenames []string
+	var filenames []string
 
 	for _, filename := range paths {
-    filename = RemovePath(filename)                          // remove $HOME/gignr/templates/ -> template.gitignore
-    filename = RemoveGitignoreExt(filename)                  // remove file ext -> template
+		filename = RemovePath(filename)                          // remove $HOME/gignr/templates/ -> template.gitignore
+		filename = RemoveGitignoreExt(filename)                  // remove file ext -> template
 		filenames = append(filenames, strings.ToLower(filename)) // append lowercase template name
 	}
 
-  return filenames
+	return filenames
 }
