@@ -1,11 +1,11 @@
-package cmd
+package commands
 
 import (
 	"bufio"
 	"os"
 	"strings"
 
-	"github.com/michaelnavs/gignr/utils"
+	"github.com/michaelnavs/gignr/pkg/utils"
 	"github.com/spf13/cobra"
 )
 

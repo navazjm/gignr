@@ -1,10 +1,10 @@
-package cmd
+package commands
 
 import (
 	"fmt"
 	"sort"
 
-	"github.com/michaelnavs/gignr/utils"
+	"github.com/michaelnavs/gignr/pkg/utils"
 	"github.com/spf13/cobra"
 )
 

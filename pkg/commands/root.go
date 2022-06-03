@@ -1,10 +1,12 @@
-package cmd
+package commands
 
 import (
 	"fmt"
 	"os"
 
+  "github.com/michaelnavs/gignr/pkg/tui"
 	"github.com/spf13/cobra"
+  tea "github.com/charmbracelet/bubbletea"
 	"github.com/spf13/viper"
 )
 
@@ -15,6 +17,7 @@ var rootCmd = &cobra.Command{
 	Use:   "gignr",
 	Short: "Generate .gitignore file for your project",
 	Long:  "Generate .gitignore file for your project",
+  Run: onRootCmd,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
@@ -61,4 +64,12 @@ func initConfig() {
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}
+}
+
+func onRootCmd(cmd *cobra.Command, args []string) {
+  p := tea.NewProgram(tui.InitialModel())
+  if err := p.Start(); err != nil {
+      fmt.Printf("Alas, there's been an error: %v", err)
+      os.Exit(1)
+  }
 }

@@ -29,8 +29,8 @@ func GetTemplates() []string {
 		fmt.Println("Error finding project directory")
 	}
 
-	templatesDir := path.Dir(packagePath)             // packagePath -> path/to/gignr/utils
-	templatesDir = templatesDir[:len(templatesDir)-5] // remove utils from path -> path/to/gignr
+	templatesDir := path.Dir(packagePath)             // packagePath -> path/to/gignr/pkg/utils
+	templatesDir = templatesDir[:len(templatesDir)-9] // remove utils from path -> path/to/gignr
 	templatesDir += "templates/*.gitignore"           // set path to templates/*.gitignore -> path/to/gignr/templates/*.gitignore
 
 	templateFiles, err := filepath.Glob(templatesDir) // get all .gitignore files in path/to/gignr/templates
