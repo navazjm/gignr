@@ -1,4 +1,4 @@
-module github.com/michaelnavs/gignr
+module github.com/tehmj/gignr
 
 go 1.18
 

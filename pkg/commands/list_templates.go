@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/michaelnavs/gignr/pkg/utils"
+	"github.com/michaelnavs/tehmj/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
