@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"os"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/spf13/cobra"
+	"github.com/tehmj/gignr/pkg/tui"
 )
 
 var cfgFile string
@@ -14,7 +16,7 @@ var rootCmd = &cobra.Command{
 	Use:   "gignr",
 	Short: "Generate .gitignore file for your project",
 	Long:  "Generate .gitignore file for your project",
-  Run: onRootCmd,
+	Run:   onRootCmd,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
@@ -40,9 +42,9 @@ func init() {
 }
 
 func onRootCmd(cmd *cobra.Command, args []string) {
-  p := tea.NewProgram(tui.InitialModel())
-  if err := p.Start(); err != nil {
-      fmt.Printf("Alas, there's been an error: %v", err)
-      os.Exit(1)
-  }
+	p := tea.NewProgram(tui.InitialModel())
+	if err := p.Start(); err != nil {
+		fmt.Printf("Alas, there's been an error: %v", err)
+		os.Exit(1)
+	}
 }
