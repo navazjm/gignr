@@ -42,9 +42,8 @@ func init() {
 }
 
 func onRootCmd(cmd *cobra.Command, args []string) {
-	p := tea.NewProgram(tui.InitialModel())
-	if err := p.Start(); err != nil {
-		fmt.Printf("Alas, there's been an error: %v", err)
+	if err := tea.NewProgram(tui.NewModel()).Start(); err != nil {
+		fmt.Println("Error running program:", err)
 		os.Exit(1)
 	}
 }
