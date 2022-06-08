@@ -8,32 +8,32 @@ import (
 )
 
 type model struct {
-  list list.Model
-  selection []string
+	list      list.Model
+	selection []string
 }
 
 func NewModel() model {
 
-  gitignoreTemplates := utils.ConvertPathsToFilenames(utils.GetTemplates())
-  
-  var templates []list.Item
+	gitignoreTemplates := utils.ConvertPathsToFilenames(utils.GetTemplates())
 
-  templatesCount := len(gitignoreTemplates)
-  for i:=0; i < templatesCount; i++ {
-    newTemplateItem := templateItem{title:gitignoreTemplates[i]}  
-    templates = append(templates, newTemplateItem)
-  }
+	var templates []list.Item
 
-  templateList := list.New(templates, templateItemDelegate{}, 0, 0)
-  templateList.Title = "Welcome to Gignr - Generate .gitignore templates at ease"
-  templateList.Styles.Title = lipgloss.NewStyle().Foreground(lipgloss.Color("#FFFDF5"))
-  templateList.Paginator.PerPage = 25
-  templateList.Paginator.ActiveDot = lipgloss.NewStyle().Foreground(lipgloss.AdaptiveColor{Light: "235", Dark: "252"}).Render("•")
+	templatesCount := len(gitignoreTemplates)
+	for i := 0; i < templatesCount; i++ {
+		newTemplateItem := templateItem{title: gitignoreTemplates[i]}
+		templates = append(templates, newTemplateItem)
+	}
+
+	templateList := list.New(templates, templateItemDelegate{}, 0, 0)
+	templateList.Title = "Welcome to Gignr - Generate .gitignore templates at ease"
+	templateList.Styles.Title = lipgloss.NewStyle().Foreground(lipgloss.Color("#FFFDF5"))
+	templateList.Paginator.PerPage = 25
+	templateList.Paginator.ActiveDot = lipgloss.NewStyle().Foreground(lipgloss.AdaptiveColor{Light: "235", Dark: "252"}).Render("•")
 	templateList.Paginator.InactiveDot = lipgloss.NewStyle().Foreground(lipgloss.AdaptiveColor{Light: "250", Dark: "238"}).Render("•")
 	templateList.Paginator.SetTotalPages(len(gitignoreTemplates))
 
 	return model{
-    list: templateList,
+		list: templateList,
 	}
 }
 
@@ -47,7 +47,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		switch msg.String() {
 		case "ctrl+c", "q":
 			return m, tea.Quit
-    }
+		}
 	}
 
 	var cmd tea.Cmd
@@ -57,5 +57,5 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (m model) View() string {
-  return lipgloss.NewStyle().Padding(1, 2).Render(m.list.View())
+	return lipgloss.NewStyle().Padding(1, 2).Render(m.list.View())
 }

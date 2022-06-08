@@ -1,8 +1,8 @@
 package tui
 
 import (
-  "fmt"
-  "io"
+	"fmt"
+	"io"
 
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
