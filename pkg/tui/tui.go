@@ -7,12 +7,17 @@ import (
 	"github.com/tehmj/gignr/pkg/utils"
 )
 
+var statusMessageStyle = lipgloss.NewStyle().
+	Foreground(lipgloss.AdaptiveColor{Light: "#04B575", Dark: "#04B575"}).
+	Render
+
 type model struct {
-	list      list.Model
-	selection []string
+	list list.Model
 }
 
 func NewModel() model {
+
+	delegateKeys := newDelegateKeyMap()
 
 	gitignoreTemplates := utils.ConvertPathsToFilenames(utils.GetTemplates())
 
@@ -24,7 +29,8 @@ func NewModel() model {
 		templates = append(templates, newTemplateItem)
 	}
 
-	templateList := list.New(templates, templateItemDelegate{}, 0, 0)
+	templateItemDelegate := newTemplateItemDelegate(delegateKeys)
+	templateList := list.New(templates, templateItemDelegate, 0, 33)
 	templateList.Title = "Welcome to Gignr - Generate .gitignore templates at ease"
 	templateList.Styles.Title = lipgloss.NewStyle().Foreground(lipgloss.Color("#FFFDF5"))
 	templateList.Paginator.PerPage = 25

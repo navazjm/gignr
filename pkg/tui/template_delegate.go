@@ -4,31 +4,105 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 )
 
-type templateItemDelegate struct{}
+type templateItemDelegate struct {
+	keys *delegateKeyMap
+}
 
-func (d templateItemDelegate) Height() int                               { return 1 }
-func (d templateItemDelegate) Spacing() int                              { return 0 }
-func (d templateItemDelegate) Update(msg tea.Msg, m *list.Model) tea.Cmd { return nil }
+func (d templateItemDelegate) Height() int  { return 1 }
+func (d templateItemDelegate) Spacing() int { return 0 }
+
+func (d templateItemDelegate) Update(msg tea.Msg, m *list.Model) tea.Cmd {
+	t, ok := m.SelectedItem().(templateItem)
+	if !ok {
+		return nil
+	}
+
+	switch msg := msg.(type) {
+	case tea.KeyMsg:
+		switch {
+		case key.Matches(msg, d.keys.pick):
+			t.isSelected = !t.isSelected
+			return m.SetItem(m.Index(), t)
+		}
+	}
+
+	return nil
+}
+
 func (d templateItemDelegate) Render(w io.Writer, m list.Model, index int, listItem list.Item) {
-	i, ok := listItem.(templateItem)
+	t, ok := listItem.(templateItem)
 	if !ok {
 		return
 	}
 
-	str := fmt.Sprintf("%s", i)
+	str := fmt.Sprintf("%s", t.title)
 
 	fn := lipgloss.NewStyle().PaddingLeft(4).Render
 
+	if t.IsSelected() {
+		fn = func(s string) string {
+			return lipgloss.NewStyle().PaddingLeft(2).Foreground(lipgloss.Color("120")).Render("  " + s)
+		}
+	}
+
 	if index == m.Index() {
 		fn = func(s string) string {
-			return lipgloss.NewStyle().PaddingLeft(2).Foreground(lipgloss.Color("170")).Render("> " + s)
+			return lipgloss.NewStyle().PaddingLeft(2).Foreground(lipgloss.Color("110")).Render("> " + s)
 		}
 	}
 
 	fmt.Fprintf(w, fn(str))
+}
+
+func (d templateItemDelegate) ShortHelp() []key.Binding {
+	help := []key.Binding{d.keys.pick}
+	return help
+}
+
+func (d templateItemDelegate) FullHelp() [][]key.Binding {
+	help := []key.Binding{d.keys.pick}
+	return [][]key.Binding{help}
+}
+
+func newTemplateItemDelegate(keys *delegateKeyMap) templateItemDelegate {
+	return templateItemDelegate{
+		keys: keys,
+	}
+}
+
+type delegateKeyMap struct {
+	pick key.Binding
+}
+
+// Additional short help entries. This satisfies the help.KeyMap interface and
+// is entirely optional.
+func (d delegateKeyMap) ShortHelp() []key.Binding {
+	return []key.Binding{
+		d.pick,
+	}
+}
+
+// Additional full help entries. This satisfies the help.KeyMap interface and
+// is entirely optional.
+func (d delegateKeyMap) FullHelp() [][]key.Binding {
+	return [][]key.Binding{
+		{
+			d.pick,
+		},
+	}
+}
+
+func newDelegateKeyMap() *delegateKeyMap {
+	return &delegateKeyMap{
+		pick: key.NewBinding(
+			key.WithKeys(" "),
+			key.WithHelp("space", "select/deselect"),
+		),
+	}
 }
