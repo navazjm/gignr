@@ -33,7 +33,7 @@ func NewModel() model {
 	templateList := list.New(templates, templateItemDelegate, 0, 33)
 	templateList.Title = "Welcome to Gignr - Generate .gitignore templates at ease"
 	templateList.Styles.Title = lipgloss.NewStyle().Foreground(lipgloss.Color("#FFFDF5"))
-  templateList.Help.ShortSeparator = "  "
+	templateList.Help.ShortSeparator = "  "
 	templateList.Paginator.PerPage = 25
 	templateList.Paginator.SetTotalPages(len(gitignoreTemplates))
 
