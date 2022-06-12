@@ -42,7 +42,7 @@ func init() {
 }
 
 func onRootCmd(cmd *cobra.Command, args []string) {
-	if err := tea.NewProgram(tui.NewModel(), tea.WithAltScreen()).Start(); err != nil {
+	if err := tea.NewProgram(tui.NewModel()).Start(); err != nil {
 		fmt.Println("Error running program:", err)
 		os.Exit(1)
 	}
