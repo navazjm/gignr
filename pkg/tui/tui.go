@@ -39,7 +39,7 @@ func NewModel() model {
 	templateList.Title = "Gignr"
 	templateList.Styles.Title = lipgloss.NewStyle().Foreground(lipgloss.Color("#FFFDF5"))
 	templateList.Help.ShortSeparator = "  "
-  templateList.Paginator.Type = paginator.Arabic
+	templateList.Paginator.Type = paginator.Arabic
 	templateList.AdditionalFullHelpKeys = func() []key.Binding {
 		return []key.Binding{
 			listKeys.generateTemplate,

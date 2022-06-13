@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/spf13/cobra"
 	"github.com/navazjm/gignr/pkg/utils"
+	"github.com/spf13/cobra"
 )
 
 // listCmd represents the list command

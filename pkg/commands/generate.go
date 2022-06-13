@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/spf13/cobra"
 	"github.com/navazjm/gignr/pkg/utils"
+	"github.com/spf13/cobra"
 )
 
 var templates []string

@@ -5,8 +5,8 @@ import (
 	"os"
 
 	tea "github.com/charmbracelet/bubbletea"
-	"github.com/spf13/cobra"
 	"github.com/navazjm/gignr/pkg/tui"
+	"github.com/spf13/cobra"
 )
 
 var cfgFile string
