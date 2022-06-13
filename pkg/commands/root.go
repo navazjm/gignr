@@ -6,7 +6,7 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/spf13/cobra"
-	"github.com/tehmj/gignr/pkg/tui"
+	"github.com/navazjm/gignr/pkg/tui"
 )
 
 var cfgFile string

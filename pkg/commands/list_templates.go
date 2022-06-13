@@ -5,7 +5,7 @@ import (
 	"sort"
 
 	"github.com/spf13/cobra"
-	"github.com/tehmj/gignr/pkg/utils"
+	"github.com/navazjm/gignr/pkg/utils"
 )
 
 // listCmd represents the list command

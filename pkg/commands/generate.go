@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"github.com/tehmj/gignr/pkg/utils"
+	"github.com/navazjm/gignr/pkg/utils"
 )
 
 var templates []string
