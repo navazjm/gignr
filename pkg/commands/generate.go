@@ -33,7 +33,10 @@ func init() {
 	// is called directly, e.g.:
 	generateCmd.Flags().BoolVarP(&isAppending, "append", "a", false, "This will append templates to an existing .gitignore file.")
 	generateCmd.Flags().StringArrayVarP(&templates, "template", "t", templates, "REQUIRED. Specify which templates to use to generate .gitignore file.")
-	generateCmd.MarkFlagRequired("template")
+	err := generateCmd.MarkFlagRequired("template")
+	if err != nil {
+		cobra.CheckErr(err)
+	}
 }
 
 func onGnerate(cmd *cobra.Command, args []string) {

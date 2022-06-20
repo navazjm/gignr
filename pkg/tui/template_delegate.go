@@ -41,8 +41,6 @@ func (d templateItemDelegate) Render(w io.Writer, m list.Model, index int, listI
 		return
 	}
 
-	str := fmt.Sprintf("%s", t.title)
-
 	fn := lipgloss.NewStyle().PaddingLeft(4).Render
 
 	if t.IsSelected() {
@@ -57,7 +55,7 @@ func (d templateItemDelegate) Render(w io.Writer, m list.Model, index int, listI
 		}
 	}
 
-	fmt.Fprintf(w, fn(str))
+	fmt.Fprint(w, fn(t.title))
 }
 
 func (d templateItemDelegate) ShortHelp() []key.Binding {

@@ -13,9 +13,9 @@ import (
 	"github.com/navazjm/gignr/pkg/utils"
 )
 
-var statusMessageStyle = lipgloss.NewStyle().
-	Foreground(lipgloss.AdaptiveColor{Light: "#04B575", Dark: "#04B575"}).
-	Render
+// var statusMessageStyle = lipgloss.NewStyle().
+// 	Foreground(lipgloss.AdaptiveColor{Light: "#04B575", Dark: "#04B575"}).
+// 	Render
 
 type model struct {
 	list         list.Model
