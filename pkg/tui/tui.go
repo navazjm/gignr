@@ -66,6 +66,13 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		switch msg.String() {
 		case "ctrl+c", "q":
 			return m, tea.Quit
+		case m.keys.generateTemplate.Help().Key:
+			// TODO:
+			// if no templates selected, display an error status message
+			// generate new .gitignore template if one or more template is selected
+			// should exit the program if no errors creating the template
+			// if there is an error, display an appropriate error status message
+			return m, tea.Quit
 		}
 	}
 
