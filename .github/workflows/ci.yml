@@ -11,8 +11,8 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    # env:
-      # GOFLAGS: -mod=vendor
+    env:
+      GOFLAGS: -mod=vendor
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
