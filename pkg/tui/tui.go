@@ -1,6 +1,10 @@
 package tui
 
 import (
+	"bufio"
+	"os"
+	"strings"
+
 	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/paginator"
@@ -30,7 +34,7 @@ func NewModel() model {
 
 	templatesCount := len(gitignoreTemplates)
 	for i := 0; i < templatesCount; i++ {
-		newTemplateItem := templateItem{title: gitignoreTemplates[i]}
+		newTemplateItem := templateItem{title: gitignoreTemplates[i], isSelected: false}
 		templates = append(templates, newTemplateItem)
 	}
 
@@ -67,11 +71,81 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "ctrl+c", "q":
 			return m, tea.Quit
 		case m.keys.generateTemplate.Help().Key:
-			// TODO:
-			// if no templates selected, display an error status message
-			// generate new .gitignore template if one or more template is selected
-			// should exit the program if no errors creating the template
-			// if there is an error, display an appropriate error status message
+			// create list of selected templates
+			var selectedTemplates []string
+			for _, item := range m.list.Items() {
+				templateItem := item.(templateItem)
+				if templateItem.IsSelected() {
+					selectedTemplates = append(selectedTemplates, templateItem.Title())
+				}
+			}
+
+			if len(selectedTemplates) == 0 {
+				// TODO: tea cmd to update status message with err message
+				return m, nil
+			}
+
+			templatePaths := utils.GetTemplates()                             // used to read content of gitignore templates
+			templateFilenames := utils.ConvertPathsToFilenames(templatePaths) // used to match specified templates by user
+
+			var gitignoreContents []string // contents of the new gitignore file
+
+			for _, template := range selectedTemplates {
+				template = strings.ToLower(template)
+				for i, file := range templateFilenames {
+					if template != file {
+						continue
+					}
+
+					templateFile, err := os.Open(templatePaths[i])
+
+					if err != nil {
+						// TODO: tea cmd to update status message with err message
+						return m, nil
+					}
+
+					defer templateFile.Close()
+
+					scanner := bufio.NewScanner(templateFile)
+					for scanner.Scan() {
+						line := scanner.Text()
+						line += "\n"
+						gitignoreContents = append(gitignoreContents, line)
+					}
+
+					if err := scanner.Err(); err != nil {
+						// TODO: tea cmd to update status message with err message
+						return m, nil
+					}
+				}
+			}
+
+			// get gitignore path in users current working dir
+			gitignorePath, err := os.Getwd()
+			if err != nil {
+				// TODO: tea cmd to update status message with err message
+				return m, nil
+			}
+			gitignorePath += "/.gitignore"
+
+			var gitignoreFile *os.File
+
+			gitignoreFile, err = os.Create(gitignorePath)
+
+			if err != nil {
+				// TODO: tea cmd to update status message with err message
+				return m, nil
+			}
+
+			defer gitignoreFile.Close()
+
+			for _, line := range gitignoreContents {
+				if _, err := gitignoreFile.WriteString(line); err != nil {
+					// TODO: tea cmd to update status message with err message
+					return m, nil
+				}
+			}
+
 			return m, tea.Quit
 		}
 	}
