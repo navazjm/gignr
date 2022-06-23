@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/navazjm/gignr/pkg/utils"
+	"github.com/navazjm/gignr/internal/utils"
 	"github.com/spf13/cobra"
 )
 

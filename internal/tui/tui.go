@@ -10,7 +10,7 @@ import (
 	"github.com/charmbracelet/bubbles/paginator"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"github.com/navazjm/gignr/pkg/utils"
+	"github.com/navazjm/gignr/internal/utils"
 )
 
 var statusMessageStyle = lipgloss.NewStyle().
