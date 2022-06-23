@@ -13,9 +13,9 @@ import (
 	"github.com/navazjm/gignr/pkg/utils"
 )
 
-// var statusMessageStyle = lipgloss.NewStyle().
-// 	Foreground(lipgloss.AdaptiveColor{Light: "#04B575", Dark: "#04B575"}).
-// 	Render
+var statusMessageStyle = lipgloss.NewStyle().
+	Foreground(lipgloss.AdaptiveColor{Light: "#04B575", Dark: "#04B575"}).
+	Render
 
 type model struct {
 	list         list.Model
@@ -80,9 +80,9 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				}
 			}
 
-			if len(selectedTemplates) == 0 {
-				// TODO: tea cmd to update status message with err message
-				return m, nil
+			if len(selectedTemplates) < 1 {
+				statusCmd := m.list.NewStatusMessage(statusMessageStyle("Error! No templates selected"))
+				return m, statusCmd
 			}
 
 			templatePaths := utils.GetTemplates()                             // used to read content of gitignore templates
@@ -100,8 +100,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					templateFile, err := os.Open(templatePaths[i])
 
 					if err != nil {
-						// TODO: tea cmd to update status message with err message
-						return m, nil
+						statusCmd := m.list.NewStatusMessage(statusMessageStyle(err.Error()))
+						return m, statusCmd
 					}
 
 					defer templateFile.Close()
@@ -114,8 +114,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 					}
 
 					if err := scanner.Err(); err != nil {
-						// TODO: tea cmd to update status message with err message
-						return m, nil
+						statusCmd := m.list.NewStatusMessage(statusMessageStyle(err.Error()))
+						return m, statusCmd
 					}
 				}
 			}
@@ -123,8 +123,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			// get gitignore path in users current working dir
 			gitignorePath, err := os.Getwd()
 			if err != nil {
-				// TODO: tea cmd to update status message with err message
-				return m, nil
+				statusCmd := m.list.NewStatusMessage(statusMessageStyle(err.Error()))
+				return m, statusCmd
 			}
 			gitignorePath += "/.gitignore"
 
@@ -133,16 +133,16 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			gitignoreFile, err = os.Create(gitignorePath)
 
 			if err != nil {
-				// TODO: tea cmd to update status message with err message
-				return m, nil
+				statusCmd := m.list.NewStatusMessage(statusMessageStyle(err.Error()))
+				return m, statusCmd
 			}
 
 			defer gitignoreFile.Close()
 
 			for _, line := range gitignoreContents {
 				if _, err := gitignoreFile.WriteString(line); err != nil {
-					// TODO: tea cmd to update status message with err message
-					return m, nil
+					statusCmd := m.list.NewStatusMessage(statusMessageStyle(err.Error()))
+					return m, statusCmd
 				}
 			}
 
