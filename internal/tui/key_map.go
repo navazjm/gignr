@@ -5,14 +5,19 @@ import (
 )
 
 type listKeyMap struct {
-	generateTemplate key.Binding
+	generateGitignore key.Binding
+  deselectAllTemplates key.Binding
 }
 
 func newListKeyMap() *listKeyMap {
 	return &listKeyMap{
-		generateTemplate: key.NewBinding(
+		generateGitignore: key.NewBinding(
 			key.WithKeys("enter"),
 			key.WithHelp("enter", "generate"),
+		),
+		deselectAllTemplates: key.NewBinding(
+			key.WithKeys("d"),
+			key.WithHelp("d", "deselect all"),
 		),
 	}
 }
