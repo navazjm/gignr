@@ -5,8 +5,8 @@ import (
 )
 
 type listKeyMap struct {
-	generateGitignore key.Binding
-  deselectAllTemplates key.Binding
+	generateGitignore    key.Binding
+	deselectAllTemplates key.Binding
 }
 
 func newListKeyMap() *listKeyMap {
