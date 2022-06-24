@@ -13,8 +13,9 @@ import (
 	"github.com/navazjm/gignr/internal/utils"
 )
 
+// only used to display error messages in red color
 var statusMessageStyle = lipgloss.NewStyle().
-	Foreground(lipgloss.AdaptiveColor{Light: "#04B575", Dark: "#04B575"}).
+	Foreground(lipgloss.AdaptiveColor{Light: "#E45649", Dark: "#DE5D68"}).
 	Render
 
 type model struct {
@@ -41,7 +42,7 @@ func NewModel() model {
 	templateItemDelegate := newTemplateItemDelegate(delegateKeys)
 	templateList := list.New(templates, templateItemDelegate, 0, 0)
 	templateList.Title = "Gignr"
-	templateList.Styles.Title = lipgloss.NewStyle().Foreground(lipgloss.Color("#FFFDF5"))
+	templateList.Styles.Title = lipgloss.NewStyle().Foreground(lipgloss.AdaptiveColor{Light: "#3D3D3D", Dark: "#FFFDF5"})
 	templateList.Help.ShortSeparator = "  "
 	templateList.Paginator.Type = paginator.Arabic
 	templateList.AdditionalFullHelpKeys = func() []key.Binding {
