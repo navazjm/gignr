@@ -47,7 +47,8 @@ func NewModel() model {
 	templateList.Paginator.Type = paginator.Arabic
 	templateList.AdditionalFullHelpKeys = func() []key.Binding {
 		return []key.Binding{
-			listKeys.generateTemplate,
+			listKeys.generateGitignore,
+			listKeys.deselectAllTemplates,
 		}
 	}
 
@@ -71,7 +72,18 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		switch msg.String() {
 		case "ctrl+c", "q":
 			return m, tea.Quit
-		case m.keys.generateTemplate.Help().Key:
+		case m.keys.deselectAllTemplates.Help().Key:
+			var changeTemplateCmd []tea.Cmd
+			for index, item := range m.list.Items() {
+				templateItem := item.(templateItem)
+				if templateItem.IsSelected() {
+					templateItem.isSelected = false
+					changeTemplateCmd = append(changeTemplateCmd, m.list.SetItem(index, templateItem))
+				}
+			}
+
+			return m, tea.Batch(changeTemplateCmd...)
+		case m.keys.generateGitignore.Help().Key:
 			// create list of selected templates
 			var selectedTemplates []string
 			for _, item := range m.list.Items() {
