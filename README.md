@@ -48,6 +48,12 @@ gignr -h
 
 ## Usage
 
+- Launch the tui version of gignr
+
+```sh 
+gignr
+```
+
 - List all available templates to use to generate a .gitignore file for your project
 
 ```sh 
