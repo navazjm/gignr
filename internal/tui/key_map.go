@@ -12,12 +12,12 @@ type listKeyMap struct {
 func newListKeyMap() *listKeyMap {
 	return &listKeyMap{
 		generateGitignore: key.NewBinding(
-			key.WithKeys("enter"),
-			key.WithHelp("enter", "generate"),
+			key.WithKeys("ctrl+enter"),
+			key.WithHelp("ctrl+enter", "generate"),
 		),
 		deselectAllTemplates: key.NewBinding(
-			key.WithKeys("d"),
-			key.WithHelp("d", "deselect all"),
+			key.WithKeys("ctrl+d"),
+			key.WithHelp("ctrl+d", "deselect all"),
 		),
 	}
 }
