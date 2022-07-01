@@ -45,6 +45,7 @@ func NewModel() model {
 	templateList.Styles.Title = lipgloss.NewStyle().Foreground(lipgloss.AdaptiveColor{Light: "#3D3D3D", Dark: "#FFFDF5"})
 	templateList.Help.ShortSeparator = "  "
 	templateList.Paginator.Type = paginator.Arabic
+    templateList.SetFilteringEnabled(false)
 	templateList.AdditionalFullHelpKeys = func() []key.Binding {
 		return []key.Binding{
 			listKeys.generateGitignore,
