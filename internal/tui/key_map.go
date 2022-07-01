@@ -12,8 +12,8 @@ type listKeyMap struct {
 func newListKeyMap() *listKeyMap {
 	return &listKeyMap{
 		generateGitignore: key.NewBinding(
-			key.WithKeys("ctrl+enter"),
-			key.WithHelp("ctrl+enter", "generate"),
+			key.WithKeys("ctrl+g"),
+			key.WithHelp("ctrl+g", "generate"),
 		),
 		deselectAllTemplates: key.NewBinding(
 			key.WithKeys("ctrl+d"),
