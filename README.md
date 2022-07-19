@@ -25,13 +25,16 @@ as the mvp for gignr stays the same. The goal for gignr is as follows:
 
 ## Installation
 
-### Install manually from source
+### Prerequisite
 
 1. [Install Go 1.18 or later](https://go.dev/dl/)
+
+### Install manually from source
+
 1. Clone the repo and cd into the directory
 
 ```sh 
-git clone https://github.com/michaelnavs/gignr && cd gignr
+git clone https://github.com/navazjm/gignr && cd gignr
 ```
 
 1. Install gignr
